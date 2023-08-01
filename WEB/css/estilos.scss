@@ -1,0 +1,139 @@
+@font-face {
+    font-family: cherry;
+    src: url(../Fuentes/Texto/Cherry\ Bird\ Demo.ttf);
+}
+
+@font-face {
+    font-family: elegant;
+    src: url(../Fuentes/Texto/Elegant\ Handwriting.otf);
+}
+
+@font-face {
+    font-family: juliette;
+    src: url(../Fuentes/Texto/Juliette.otf);
+}
+
+$Font1: juliette;
+$Font2: cherry;
+$Font3: elegant;
+
+/* Paleta de colores */
+
+$ColorFondo: #ffd5cf;
+$ColorLetra: #3c6d6f;
+$ColorBanner: #ff8a7f;
+$ColorBanner2: #ff7466;
+$ColorExtra: #ffe0dd;
+$ColorBotonContacto: #66BABD;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+}
+
+body {
+
+    background: $ColorFondo;
+    background-image: url(../img/v1013-p-0001a.jpg);
+    background-size: cover;
+}
+
+@import "_Header.scss";
+
+main {
+    height: auto;
+    margin-bottom: 60px;
+
+}
+
+
+
+/* Crear banners de tamaño 1500px ancho por 415px alto */
+
+@import "_Inicio.scss";
+
+@import "_Clientes.scss";
+
+@import "_Productos.scss";
+
+@import "_About-me.scss";
+
+@import "_Carrusel.scss";
+
+/* ################# Cards ################# */
+
+.myCard {
+    background-color: transparent;
+    max-width: 400px; 
+    perspective: 1000px;
+    text-shadow: 1px 1px 1px black;
+
+    .innerCard {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+
+        &:hover {
+            transform: rotateY(180deg);
+        }
+
+        .frontSide,
+        .backSide {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-size: cover;
+        }
+
+        .frontSide {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            color: $ColorExtra;
+            box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5);
+            font-weight: 700;
+            background-color: transparent;
+
+            .title {
+                font-size: 1em;
+                font-weight: 100;
+                text-align: center;
+            }
+        }
+
+        .backSide {
+            transform: rotateY(180deg);
+            background-color: transparent;
+
+            .title2 {
+                font-size: 1em;
+                font-weight: 900;
+                color: aliceblue;
+            }
+        }
+    }
+}
+
+@import "_Pelucas.scss";
+
+/* Pagina Contactos */
+
+@import "_Contacto.scss";
+
+/* Footer */
+
+@import "_Footer.scss";
+
+
+

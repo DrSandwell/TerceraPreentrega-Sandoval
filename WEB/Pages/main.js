@@ -13,7 +13,7 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 
 function generarHTMLProductos(productos) {
-    productosGrid.innerHTML = ''; // Limpiamos el contenido antes de mostrar los resultados
+    productosGrid.innerHTML = '';
 
     const busqueda = searchInput.value.trim().toLowerCase();
     productos.forEach((product) => {
@@ -29,12 +29,11 @@ function generarHTMLProductos(productos) {
             agregarAlCarrito(product);
         }); 
 
-        // Mostramos u ocultamos el producto según coincida con la búsqueda
         const nombreProducto = product.name.toLowerCase();
         if (nombreProducto.includes(busqueda)) {
-            div.style.display = 'block'; // Mostrar el producto
+            div.style.display = 'block'; 
         } else {
-            div.style.display = 'none'; // Ocultar el producto
+            div.style.display = 'none'; 
         }
     });
 }
@@ -78,8 +77,7 @@ function actualizarCarrito() {
     });
 
     totalCarrito.textContent = `Total: $${total}`;
-
-    // Agregar eventos a los botones "+" y "-"
+    
     const addButtons = document.querySelectorAll('.add-btn');
     const removeButtons = document.querySelectorAll('.remove-btn');
 
@@ -120,8 +118,7 @@ comprarBtn.addEventListener('click', () => {
         const totalCompra = shoppingCart.reduce((total, item) => total + item.price * item.amount, 0);
         const confirmacion = confirm(`El total de su compra es $${totalCompra}. ¿Desea continuar?`);
 
-        if (confirmacion) {
-            // Aquí puedes agregar el código para redireccionar a MercadoLibre
+        if (confirmacion) {            
             alert('Redireccionando a MercadoLibre...');
             window.open('https://www.mercadolibre.com', '_blank');
         } else {
@@ -135,25 +132,21 @@ function generarDropdownCategorias() {
     categorias.forEach((categoria) => {
         const link = document.createElement('a');
         link.className = 'dropdown-item';
-        link.textContent = categoria;
-        // Aquí podrías definir el enlace que apunta a la página de productos filtrados por categoría
+        link.textContent = categoria;        
         link.href = `productos.html?categoria=${encodeURIComponent(categoria)}`;
         dropdownMenu.appendChild(link);
     });
 }
 
-function obtenerCategoriasUnicas() {
-    // Utiliza Set para obtener categorías únicas
+function obtenerCategoriasUnicas() {    
     const categoriasUnicas = new Set(productosData.map((producto) => producto.category));
     return [...categoriasUnicas];
 }
 
 function buscarProductos(busqueda) {
-    if (busqueda === '') {
-        // Si el campo de búsqueda está vacío, mostramos todos los productos
+    if (busqueda === '') {        
         generarHTMLProductos(productosData);
     } else {
-        // Si hay texto en el campo de búsqueda, filtramos y mostramos los productos que coincidan
         const productosFiltrados = productosData.filter((product) =>
             product.name.toLowerCase().includes(busqueda.toLowerCase())
         );
@@ -175,7 +168,7 @@ function mostrarVentanaEmergente(mensaje) {
 
     setTimeout(() => {
         ventanaEmergente.remove();
-    }, 2000); // La ventana se ocultará después de 2 segundos (ajusta el valor según lo desees)
+    }, 2000); 
 }
 
 searchButton.addEventListener('click', () => {
@@ -185,7 +178,7 @@ searchButton.addEventListener('click', () => {
 
 searchInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Evitar que se envíe el formulario (en caso de que esté dentro de un formulario)
+        event.preventDefault(); 
         const busqueda = searchInput.value.trim();
         buscarProductos(busqueda);
     }

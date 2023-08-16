@@ -80,8 +80,12 @@ function buscarProductos(busqueda) {
         if (productosFiltrados.length > 0) {
             generarHTMLProductos(productosFiltrados);
         } else {
-            mostrarVentanaEmergente('No hubo coincidencias');
-        }
+            Swal.fire({
+                title: 'No hubo coincidencias',
+                text: 'No se encontraron productos que coincidan con la búsqueda.',
+                icon: 'info',
+            });
+        }    
     }
 }
 

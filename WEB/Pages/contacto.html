@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/remixicon.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <meta name="description"
         content="¿Tienes alguna pregunta o consulta? Contáctanos y estaremos encantados de ayudarte. Completa nuestro formulario de contacto o encuentra nuestras formas de comunicación directa. Estamos aquí para brindarte el mejor servicio y asegurarnos de que encuentres la peluca perfecta para tu cosplay.">
     <meta name="keywords"
@@ -38,18 +39,18 @@
             <h1>Contacto</h1>
             <div class="Grid-Contacto">
                 <div class="Formulario">
-                    <form action="">
+                    <form id="contactForm">
                         <p>
                             <label for="Nombre">Nombre</label>
-                            <input type="text" name="Nombre-Form" id="Nombre">
+                            <input type="text" name="Nombre" id="Nombre">
                         </p>
                         <p>
                             <label for="Email">Email</label>
-                            <input type="text" name="Email-Form" id="Email">
+                            <input type="text" name="Email" id="Email">
                         </p>
                         <p>
                             <label for="Telefono">Telefono</label>
-                            <input type="tel" name="Telefono-Form" id="Telefono">
+                            <input type="tel" name="Telefono" id="Telefono">
                         </p>
                         <p>
                             <label>Imagen de referencia</label>
@@ -58,7 +59,7 @@
                         </p>
                         <p class="block">
                             <label for="Mensaje">Mensaje</label>
-                            <textarea name="Mensaje-Form" rows="3" id="Mensaje"></textarea>
+                            <textarea name="Mensaje" rows="3" id="Mensaje"></textarea>
                         </p>
                         <p class="block">
                             <button type="submit">Enviar</button>
@@ -92,6 +93,9 @@
                     class="ri-tiktok-line"></i></a>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../Js/contacto.js" type="module"></script>
+    
 
 </body>
 

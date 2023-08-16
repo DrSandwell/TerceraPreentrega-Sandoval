@@ -85,19 +85,43 @@ closeModalBtn.addEventListener('click', () => {
 
 comprarBtn.addEventListener('click', () => {
     if (shoppingCart.length === 0) {
-        alert('El carrito está vacío. Agrega productos antes de comprar.');
+        Swal.fire({
+            title: 'Carrito vacío',
+            text: 'El carrito está vacío. Agrega productos antes de comprar.',
+            icon: 'warning',
+        });
     } else {
         const totalCompra = shoppingCart.reduce((total, item) => total + item.price * item.amount, 0);
-        const confirmacion = confirm(`El total de su compra es $${totalCompra}. ¿Desea continuar?`);
 
-        if (confirmacion) {            
-            alert('Redireccionando a MercadoLibre...');
-            window.open('https://www.mercadolibre.com', '_blank');
-        } else {
-            alert('Compra cancelada.');
-        }
+        Swal.fire({
+            title: 'Confirmar compra',
+            text: `El total de su compra es $${totalCompra}. ¿Desea continuar?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Redireccionando',
+                    text: 'Redireccionando a MercadoLibre...',
+                    icon: 'info',
+                });
+
+                setTimeout(() => {
+                    window.open('https://www.mercadolibre.com', '_blank');
+                }, 1500); 
+            } else {
+                Swal.fire({
+                    title: 'Compra cancelada',
+                    text: 'Su compra ha sido cancelada.',
+                    icon: 'error',
+                });
+            }
+        });
     }
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     actualizarCarrito();
 });

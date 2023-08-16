@@ -1,10 +1,22 @@
-import productosData from './listaProductos.js';
+
 import carrito from './carrito.js';
 
 const productosGrid = document.querySelector('.Productos-grid');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+let productosData = [];
+
+const cargarProductosData = async () => {
+    try {
+        const response = await fetch('../JS/listaProductos.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error al cargar los productos:', error);
+        return [];
+    }
+};
 
 function generarHTMLProductos(productos) {
     productosGrid.innerHTML = '';
@@ -32,18 +44,28 @@ function generarHTMLProductos(productos) {
     });
 }
 
-function generarDropdownCategorias() {
-    const categorias = obtenerCategoriasUnicas();
+function generarDropdownCategorias(productosData) {
+    const categorias = obtenerCategoriasUnicas(productosData);
+
     categorias.forEach((categoria) => {
         const link = document.createElement('a');
         link.className = 'dropdown-item';
-        link.textContent = categoria;        
-        link.href = `productos.html?categoria=${encodeURIComponent(categoria)}`;
+        link.textContent = categoria;
         dropdownMenu.appendChild(link);
+
+        link.addEventListener('click', () => {
+            filtrarCategorias(categoria);
+        });
     });
 }
 
-function obtenerCategoriasUnicas() {    
+
+const filtrarCategorias = (cat) => {
+    const filtrado = productosData.filter(producto => producto.category === cat);
+    generarHTMLProductos(filtrado);
+}
+
+function obtenerCategoriasUnicas(productosData) {    
     const categoriasUnicas = new Set(productosData.map((producto) => producto.category));
     return [...categoriasUnicas];
 }
@@ -89,9 +111,11 @@ searchInput.addEventListener('keypress', (event) => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    productosData = await cargarProductosData();
     generarHTMLProductos(productosData);
     carrito.actualizarCarrito();
-    generarDropdownCategorias();
+    generarDropdownCategorias(productosData);
 });
 

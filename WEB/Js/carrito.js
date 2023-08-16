@@ -55,6 +55,7 @@ function actualizarCarrito() {
         button.addEventListener('click', () => {
             shoppingCart[index].amount++;
             actualizarCarrito();
+            guardarCarritoEnLocalStorage();
         });
     });
 
@@ -66,6 +67,7 @@ function actualizarCarrito() {
                 shoppingCart.splice(index, 1);
             }
             actualizarCarrito();
+            guardarCarritoEnLocalStorage();
         });
     });
 }
@@ -95,6 +97,9 @@ comprarBtn.addEventListener('click', () => {
             alert('Compra cancelada.');
         }
     }
+});
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarCarrito();
 });
 
 export default {

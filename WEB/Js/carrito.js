@@ -8,6 +8,48 @@ const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
 
 
+/* 
+
+****************    INCORPORACION DE MERCADOPAGO A LA PAGINA    *********************
+
+const mercadopago = require("mercadopago");
+
+mercadopago.configure({
+    access_token: "TEST-184287768309596-081711-6a2de220b9e204d546a2d02b7e1c22ec-168811545",
+});
+
+let preference = {
+    items: [
+        {
+            title: "Mi producto",
+            unit_price: 100,
+            quantity: 1,
+        },
+    ],
+};
+
+mercadopago.preferences
+    .create(preference)
+    .then(function (response) {
+    // En esta instancia deberás asignar el valor dentro de response.body.id por el ID de preferencia solicitado en el siguiente paso
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+
+const mp = new MercadoPago('YOUR_PUBLIC_KEY');
+const bricksBuilder = mp.bricks();
+
+
+
+mp.bricks().create("wallet", "wallet_container", {
+    initialization: {
+        preferenceId: "<PREFERENCE_ID>",
+    },
+});
+ */
+
 function agregarAlCarrito(producto) {
     const carritoItem = shoppingCart.find((item) => item.id === producto.id);
 
@@ -47,7 +89,7 @@ function actualizarCarrito() {
     });
 
     totalCarrito.textContent = `Total: $${total}`;
-    
+
     const addButtons = document.querySelectorAll('.add-btn');
     const removeButtons = document.querySelectorAll('.remove-btn');
 
@@ -110,7 +152,7 @@ comprarBtn.addEventListener('click', () => {
 
                 setTimeout(() => {
                     window.open('https://www.mercadolibre.com', '_blank');
-                }, 1500); 
+                }, 1500);
             } else {
                 Swal.fire({
                     title: 'Compra cancelada',

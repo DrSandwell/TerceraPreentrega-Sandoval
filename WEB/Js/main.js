@@ -89,18 +89,6 @@ function buscarProductos(busqueda) {
     }
 }
 
-function mostrarVentanaEmergente(mensaje) {
-    const ventanaEmergente = document.createElement('div');
-    ventanaEmergente.className = 'ventana-emergente';
-    ventanaEmergente.innerHTML = `
-        <div class="mensaje">${mensaje}</div>
-    `;
-    document.body.appendChild(ventanaEmergente);
-
-    setTimeout(() => {
-        ventanaEmergente.remove();
-    }, 2000); 
-}
 
 searchButton.addEventListener('click', () => {
     const busqueda = searchInput.value.trim();

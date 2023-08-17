@@ -4,56 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(contactForm);
+        const btn = document.getElementById('button');
+        btn.textContent = 'Enviando...';
 
-        let loadingAlert;
-
-        Swal.fire({
-            title: 'Enviando formulario...',
-            html: 'Por favor, espera...',
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            onBeforeOpen: () => {
-                loadingAlert = Swal.getContent().querySelector('strong');
-                Swal.showLoading();
-                const timerInterval = setInterval(() => {
-                    loadingAlert.textContent = Swal.getTimerLeft();
-                }, 100);
-            },
-            onClose: () => {
-                clearInterval(timerInterval);
-            }
-        });
+        const serviceID = 'service_bfujq8g'; 
+        const templateID = 'template_ubcf4vw'; 
 
         try {
-            const response = await fetch("https://formsubmit.co/ajax/nikesandwell@gmail.com", {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: formData
+            await emailjs.sendForm(serviceID, templateID, contactForm);            
+
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'El correo electrónico se envió correctamente.',
+                icon: 'success',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload(); 
+                }
             });
-
-            const responseData = await response.json();
-
-            if (responseData.success === 'true') {
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'El formulario se envió correctamente.',
-                    icon: 'success',
-                });
-            } else {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al enviar el formulario.',
-                    icon: 'error',
-                });
-            }
         } catch (error) {
+            btn.textContent = 'Enviar';
+
             console.error('Error:', error);
+
             Swal.fire({
                 title: 'Error',
-                text: 'Hubo un problema al enviar el formulario.',
+                text: 'Hubo un problema al enviar el correo electrónico.',
                 icon: 'error',
             });
         }

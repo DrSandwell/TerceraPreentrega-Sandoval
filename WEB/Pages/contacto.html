@@ -62,7 +62,7 @@
                             <textarea name="Mensaje" rows="3" id="Mensaje"></textarea>
                         </p>
                         <p class="block">
-                            <button type="submit">Enviar</button>
+                            <button type="submit" id="button">Enviar</button>
                         </p>
                     </form>
                 </div>
@@ -84,7 +84,6 @@
             </div>
     </main>
 
-    <!-- Footer asd-->
     <footer>
         <div class="redes-sociales">
             <a href="https://www.instagram.com/peach.wigs/" target="_blank"><i class="ri-instagram-line"></i></a>
@@ -94,8 +93,13 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('IKLKA-8Vu-1Wrt884')
+    </script>
     <script src="../Js/contacto.js" type="module"></script>
-    
+
 
 </body>
 
